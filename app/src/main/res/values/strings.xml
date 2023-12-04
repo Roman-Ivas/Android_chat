@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Messanger</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="login_title">LOGIN</string>
+    <string name="username_registration">Username</string>
+    <string name="email">Email</string>
+    <string name="password_registration">Password</string>
+    <string name="register">REGISTER</string>
+    <string name="registration">REGISTRATION</string>
+    <string name="cancel">CANCEL</string>
+    <string name="login_main">LOGIN</string>
+    <string name="registration_main">REGISTRATION</string>
+    <string name="registration_login">Registration</string>
+    <string name="confirm_password">Confirm password</string>
+</resources>
