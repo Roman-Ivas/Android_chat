@@ -14,4 +14,7 @@
     <string name="registration_main">REGISTRATION</string>
     <string name="registration_login">Registration</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="write_a_message">Write a message</string>
+    <string name="send">Send</string>
+    <string name="logout">logout</string>
 </resources>

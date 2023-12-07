@@ -43,6 +43,6 @@ class MainActivity : AppCompatActivity() {
     private fun isLoggedIn(): Boolean {
         // Implement logic to check if user is logged in
         // For example, check SharedPreferences, a database, etc.
-        return false // Placeholder return value
+        return true // Placeholder return value
     }
 }
