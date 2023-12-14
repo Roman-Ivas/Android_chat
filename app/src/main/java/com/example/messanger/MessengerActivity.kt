@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 
-class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragment.OnSelectedButtonListener {
+class MessengerActivity : AppCompatActivity(), View.OnClickListener{
     private val LOG_TAG = "MessengerActivity"
     //    private static final int FRAGMENT_ID_USER = 1;
     //    private static final int FRAGMENT_ID_CHAT = 2;
@@ -135,8 +135,7 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragmen
         nm.notify(4, notification)
     }
 
-    override fun onButtonSelected(userID: String, messageStr: String) {
-        TODO("Not yet implemented")
-//        showNotification(userID, messageStr)
-    }
+//    override fun onButtonSelected(userID: String, messageStr: String) {
+////        showNotification(userID, messageStr)
+//    }
 }
