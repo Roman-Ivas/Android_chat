@@ -8,3 +8,5 @@
 ![7](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/7.png)
 ![8](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/8.png)
 ![9](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/9.png)
+![10](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/10.png)
+![11](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/11.png)
