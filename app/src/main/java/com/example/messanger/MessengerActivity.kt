@@ -7,14 +7,14 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 
-class MessengerActivity : AppCompatActivity(), View.OnClickListener {
+class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragment.OnSelectedButtonListener {
     private val LOG_TAG = "MessengerActivity"
     //    private static final int FRAGMENT_ID_USER = 1;
     //    private static final int FRAGMENT_ID_CHAT = 2;
@@ -133,5 +133,10 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener {
         val notification = builder.build()
         notification.flags = notification.flags or Notification.FLAG_AUTO_CANCEL
         nm.notify(4, notification)
+    }
+
+    override fun onButtonSelected(userID: String, messageStr: String) {
+        TODO("Not yet implemented")
+//        showNotification(userID, messageStr)
     }
 }
