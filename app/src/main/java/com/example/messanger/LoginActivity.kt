@@ -29,6 +29,8 @@ class LoginActivity : AppCompatActivity() {
         val password = passwordEditText.text.toString()
 
         Log.i(LOG_TAG, "USERNAME: ${username}, PASSWORD: ${password}.")
-        finish();
+        val intent = Intent(this, MessengerActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

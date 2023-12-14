@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,23 +21,23 @@ class MainActivity : AppCompatActivity() {
         registration.visibility = View.GONE
 
         Handler().postDelayed({
-            if(isLoggedIn()){
+            if (isLoggedIn()) {
                 val intent = Intent(this, ChatActivity::class.java)
                 startActivity(intent)
                 finish()
-            }else{
+            } else {
                 clickOnLogin(null)
             }
         }, 3000)
     }
 
-    fun clickOnLogin(view: View?){
+    fun clickOnLogin(view: View?) {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    fun clickOnRegistration(view: View?){
+    fun clickOnRegistration(view: View?) {
         val intent = Intent(this, RegistrationActivity::class.java)
         startActivity(intent)
         finish()
@@ -43,6 +46,6 @@ class MainActivity : AppCompatActivity() {
     private fun isLoggedIn(): Boolean {
         // Implement logic to check if user is logged in
         // For example, check SharedPreferences, a database, etc.
-        return true // Placeholder return value
+        return false // Placeholder return value
     }
 }
