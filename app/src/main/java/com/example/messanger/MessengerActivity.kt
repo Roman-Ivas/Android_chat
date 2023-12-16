@@ -10,11 +10,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 
-class MessengerActivity : AppCompatActivity(), View.OnClickListener{
+class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragment.OnSelectedButtonListener{
     private val LOG_TAG = "MessengerActivity"
     //    private static final int FRAGMENT_ID_USER = 1;
     //    private static final int FRAGMENT_ID_CHAT = 2;
@@ -132,10 +133,11 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener{
         builder.setContentIntent(contentIntent)
         val notification = builder.build()
         notification.flags = notification.flags or Notification.FLAG_AUTO_CANCEL
-        nm.notify(4, notification)
+        nm.notify(4, notification) //????????? error
     }
 
-//    override fun onButtonSelected(userID: String, messageStr: String) {
-////        showNotification(userID, messageStr)
-//    }
+    override fun onButtonSelected(userID: String, messageStr: String) {
+//        showNotification(userID, messageStr)
+        Toast.makeText(this, messageStr, Toast.LENGTH_SHORT).show()
+    }
 }
