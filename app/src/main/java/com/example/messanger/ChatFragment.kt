@@ -1,5 +1,6 @@
 package com.example.messanger
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ class ChatFragment : Fragment(){
         sendButton = view.findViewById(R.id.sendChatButton)
         mesTextView = view.findViewById(R.id.messageEditText)
 
+        setFont(sendButton)
+
         // Set the click listener for the sendButton
         sendButton.setOnClickListener(sendMessageClickListener)
 
@@ -41,5 +44,10 @@ class ChatFragment : Fragment(){
 
     interface OnSelectedButtonListener {
         fun onButtonSelected(userID: String, messageStr: String)
+    }
+
+    private fun setFont(view: Button) {
+        val myCustomFontBold = Typeface.createFromAsset(activity?.assets, "font/fontawesome_webfont.ttf")
+        view.typeface = myCustomFontBold
     }
 }

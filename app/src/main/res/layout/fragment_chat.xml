@@ -64,6 +64,7 @@
             android:layout_margin="3dp"
             android:text="@string/send"
             android:background="#7E03A9F4"
+            android:textSize="24sp"
             style="@style/Widget.AppCompat.Button.Borderless"
 
             />

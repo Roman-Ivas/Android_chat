@@ -15,10 +15,10 @@
     <string name="registration_login">Registration</string>
     <string name="confirm_password">Confirm password</string>
     <string name="write_a_message">Write a message</string>
-    <string name="send">Send</string>
+    <string name="send" translatable="false">&#xf1d8;</string>
     <string name="logout">logout</string>
     <string name="chat">Chat</string>
-    <string name="users">Users</string>
+    <string name="users" translatable="false">&#xf007;</string>
     <string name="title_activity_messager">MessagerActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -29,4 +29,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="textview">TextView</string>
+    <string name="preferences">preferences</string>
+    <string name="service_status">Service Status</string>
+    <string name="stop_service">Stop Service</string>
+    <string name="start_service">Start Service</string>
 </resources>
