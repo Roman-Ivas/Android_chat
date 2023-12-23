@@ -1,19 +1,19 @@
 package com.example.messanger
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
-import java.io.IOException
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    private var sPref: SharedPreferences? = null
+    private val LOGIN = "login"
+    private var PASSWORD = "password"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             if (isLoggedIn()) {
-                val intent = Intent(this, ChatActivity::class.java)
+                val intent = Intent(this, MessengerActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
@@ -49,6 +49,17 @@ class MainActivity : AppCompatActivity() {
     private fun isLoggedIn(): Boolean {
         // Implement logic to check if user is logged in
         // For example, check SharedPreferences, a database, etc.
-        return false // Placeholder return value
+        return loadTextPrefs() // Placeholder return value
+    }
+
+    private fun loadTextPrefs(): Boolean {
+        sPref = getPreferences(MODE_PRIVATE)
+        val loginText: String? = sPref?.getString(LOGIN, "")
+        val passwordText: String? = sPref?.getString(PASSWORD, "")
+        Toast.makeText(this, "Text loaded", Toast.LENGTH_SHORT).show()
+        if(!loginText.equals("") && !passwordText.equals("")){
+            return true
+        }
+        return false
     }
 }

@@ -53,4 +53,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Gson converter
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0") // Use the latest version
+
+    implementation ("org.mindrot:jbcrypt:0.4") // Add bcrypt library for password hashing
 }

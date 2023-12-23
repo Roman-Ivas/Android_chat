@@ -1,5 +1,6 @@
 package com.example.messanger
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +10,12 @@ import android.widget.Toast
 
 class RegistrationActivity : AppCompatActivity() {
     private val LOG_TAG = "RegistrationActivity"
+    private lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        dbHelper = DBHelper(this)
     }
 
     fun clickOnCancel(view: View){
@@ -40,8 +43,28 @@ class RegistrationActivity : AppCompatActivity() {
             return
         }
 
+        if (dbHelper.usernameExists(username)) {
+            Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (dbHelper.emailExists(email)) {
+            Toast.makeText(this, "Email already exists", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         Log.i(LOG_TAG, "USERNAME: ${username}, PASSWORD: ${password}, EMAIL: ${email}.")
-        finish()
+        // Save the user in the database
+        try {
+            dbHelper.addUser(username, email, password)
+            Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Registration failed: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun checkPassword(password: String, confirmPassword: String) : Boolean{

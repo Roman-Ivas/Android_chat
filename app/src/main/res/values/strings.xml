@@ -33,4 +33,8 @@
     <string name="service_status">Service Status</string>
     <string name="stop_service">Stop Service</string>
     <string name="start_service">Start Service</string>
+    <string name="write_text">write text</string>
+    <string name="read_text">read text</string>
+    <string name="enter_text">enter text</string>
+    <string name="clear_text">clear text</string>
 </resources>
