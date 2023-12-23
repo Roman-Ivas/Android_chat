@@ -16,3 +16,7 @@
 ![15](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/15.png)
 ![16](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/16.png)
 ![17](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/17.png)
+![18](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/18.png)
+![19](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/19.png)
+![20](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/20.png)
+![21](https://github.com/SvitLanaSvit/Step_Academy_Android_Messager/blob/main/21.png)
