@@ -4,18 +4,26 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import com.example.messanger.ChatFragment
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MsgService : Service() {
     private val TAG = "MsgService"
 
-    private val BROADCAST_ACTION = "com.itstep.messanger.servicebackbroadcastmessage"
-    private val PARAM_TASK          = "task"
-    private val PARAM_USERS_LIST    = "users_list"
-    private val PARAM_TEXT_MSG      = "textMsg"
-    private val PARAM_USER_NICK      = "userNick"
+    companion object{
+        internal val BROADCAST_ACTION = "com.itstep.messanger.servicebackbroadcastmessage"
+        private val PARAM_TASK          = "task"
+        private val PARAM_USERS_LIST    = "users_list"
+        private val PARAM_TEXT_MSG      = "textMsg"
+        private val PARAM_USER_NICK      = "userNick"
 
-    private val TASK_MSH = 1
-    private val TASK_USERS = 2
+        private val TASK_MSH = 1
+        private val TASK_USERS = 2
+
+        var chatFragment : ChatFragment? = null
+    }
 
     private var bWorkService: Boolean = true
 
@@ -28,26 +36,6 @@ class MsgService : Service() {
         Log.i(TAG, "Service onStartCommand $startId")
 
         var time = intent?.getIntExtra("time",0)
-
-//        var bWorkService: Boolean = true
-//        var count = 0;
-//        while (bWorkService) {
-//
-//            try {
-//                Thread.sleep(2000)
-//                Log.i(TAG, "Check user Messages")
-//
-//                count++;
-//
-//                if (count > 5)
-//                    bWorkService = false;
-//
-//            } catch (e: Exception) {
-//            }
-//            Log.i(TAG, "Service running $count")
-//        }
-//
-//        Log.i(TAG, "Service finish")
         someTask()
 
         return START_STICKY
@@ -80,11 +68,9 @@ class MsgService : Service() {
 
                     if (i == 5) {
                         Log.i(TAG, "Check message!!! - $i")
-                        intent.putExtra(PARAM_TASK, TASK_MSH)
-                        intent.putExtra(PARAM_TEXT_MSG, "Hello Kity ;-)))")
-                        intent.putExtra(PARAM_USER_NICK, "Vasya")
-
-                        sendBroadcast(intent)
+                        if(chatFragment != null){
+                            chatFragment?.onSendMsgClick("Hallo", "Ana")
+                        }
                     }
 
                     if (i == 6) {
@@ -104,12 +90,9 @@ class MsgService : Service() {
                     }
 
                     if (i == 10) {
-                        Log.i(TAG, "Check message!!! - $i")
-                        intent.putExtra(PARAM_TASK, TASK_MSH)
-                        intent.putExtra(PARAM_TEXT_MSG, "By-By")
-                        intent.putExtra(PARAM_USER_NICK, "Vasya")
-
-                        sendBroadcast(intent)
+                        if(chatFragment != null){
+                            chatFragment?.onSendMsgClick("How are you?", "Lana")
+                        }
                         i = 0;
                     }
 
@@ -122,6 +105,12 @@ class MsgService : Service() {
             }
             stopSelf()
         }.start()
+    }
+
+    private fun getCurrentTimeString(): String {
+        // Format the current time as a string
+        val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return dateFormat.format(Date())
     }
 
     override fun onDestroy() {

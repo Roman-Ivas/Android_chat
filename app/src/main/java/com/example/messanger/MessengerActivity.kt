@@ -28,9 +28,6 @@ import java.io.IOException
 
 class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragment.OnSelectedButtonListener{
     private val LOG_TAG = "MessengerActivity"
-    //    private static final int FRAGMENT_ID_USER = 1;
-    //    private static final int FRAGMENT_ID_CHAT = 2;
-    //    private static final int FRAGMENT_ID_PREFS = 3;
     private var usersButton: Button? = null
     private var chatButton: Button? = null
     private var preferencesButton: Button? = null
@@ -39,20 +36,6 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragmen
     private var usersFragment: UserFragment? = null
     private var chatFragment: ChatFragment? = null
     private var preferencesFragment: PreferencesFragment? = null
-
-    //---------------------------------------------------
-    var br: BroadcastReceiver? = null
-
-    val BROADCAST_ACTION = "com.itstep.messanger.servicebackbroadcastmessage"
-
-    val PARAM_TASK          = "task"
-    val PARAM_USERS_LIST    = "users_list"
-    val PARAM_TEXT_MSG      = "textMsg"
-    val PARAM_USER_NICK     = "userNick"
-
-    val TASK_MSH = 1
-    val TASK_USERS = 2
-    //---------------------------------------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,55 +71,8 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragmen
 
         currentFragment = chatFragment
 
-//        // create BroadcastReceiver
-//        br = object : BroadcastReceiver() {
-//            // действия при получении сообщений
-//            override fun onReceive(context: Context, intent: Intent) {
-////                val PARAM_TASK          = "task"
-////                val PARAM_STATUS        = "status"
-////                val PARAM_TEXT_MSG      = "textMsg"
-//
-//                val task = intent.getIntExtra(PARAM_TASK, 0)
-//
-//                if (task == TASK_MSH) {
-//                    val msg = intent.getStringExtra(PARAM_TEXT_MSG)
-//                    val user = intent.getStringExtra(PARAM_USER_NICK)
-//
-//                    Log.i(LOG_TAG, "$user - $msg")
-//
-//                    if (msg != null && user != null) {
-//                        showNotification(msg, user)
-//                    }
-//                } else
-//                    if (task == TASK_USERS) {
-//                        val usersList = intent.getStringExtra(PARAM_USERS_LIST)
-//
-//                        Log.i(LOG_TAG, usersList!!)
-//                    }
-//            }
-//        }
-
-        // Initialize BroadcastReceiver
-        br = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val task = intent?.getIntExtra(PARAM_TASK, 0)
-                when (task) {
-                    TASK_MSH -> {
-                        val msg = intent.getStringExtra(PARAM_TEXT_MSG)
-                        val userNick = intent.getStringExtra(PARAM_USER_NICK)
-                        handleNewMessage(userNick, msg)
-                    }
-                    TASK_USERS -> {
-                        val usersList = intent.getStringExtra(PARAM_USERS_LIST)
-                        handleUsersListUpdate(usersList)
-                    }
-                }
-            }
-        }
-        // Register BroadcastReceiver
-        val intentFilter = IntentFilter(BROADCAST_ACTION)
-//        registerReceiver(br, intentFilter)
-
+        val intent = Intent(this, MsgService::class.java) //service!!!
+        startService(intent)
     }
 
     private fun handleNewMessage(userNick: String?, msg: String?) {
@@ -157,14 +93,11 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragmen
             R.id.chat_btn-> {
                 Toast.makeText(this, "Clicked 7", Toast.LENGTH_SHORT).show()
             }
-            R.id.preferences_btn-> {
-                Toast.makeText(this, "Clicked 8", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MyService::class.java) //service!!!
-                startService(intent)
-
-                // Send a custom broadcast
-//                sendCustomBroadcast()
-            }
+//            R.id.preferences_btn-> {
+//                Toast.makeText(this, "Clicked 8", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(this, MsgService::class.java) //service!!!
+//                startService(intent)
+//            }
 
         }
 
@@ -206,13 +139,6 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragmen
         if (fragment is PreferencesFragment) {
             (fragment as PreferencesFragment).updateServiceStatus("SERVICE STARTED")
         }
-    }
-
-    private fun sendCustomBroadcast() {
-        val intent = Intent(BROADCAST_ACTION)
-        // Add extra data if necessary
-        intent.putExtra("extra_key", "extra_value")
-        sendBroadcast(intent)
     }
 
     private fun showNotification(title: String, message: String) {
@@ -277,57 +203,17 @@ class MessengerActivity : AppCompatActivity(), View.OnClickListener, ChatFragmen
         view.typeface = myCustomFontBold
     }
 
-//    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-//    override fun onStart() {
-//        super.onStart()
-//
-////        // create filter for BroadcastReceiver
-////        val intFilt = IntentFilter(BROADCAST_ACTION)
-////        // register BroadcastReceiver
-////        try {
-////            registerReceiver(br, intFilt)
-////        }catch (e: Exception){
-////            e.printStackTrace()
-////        }
-////
-////        Log.i(LOG_TAG, "onStart")
-//
-//        // Register BroadcastReceiver here
-//        br = object : BroadcastReceiver() {
-//            override fun onReceive(context: Context, intent: Intent) {
-//                val task = intent.getIntExtra(PARAM_TASK, 0)
-//
-//                if (task == TASK_MSH) {
-//                    val msg = intent.getStringExtra(PARAM_TEXT_MSG)
-//                    val user = intent.getStringExtra(PARAM_USER_NICK)
-//
-//                    Log.i(LOG_TAG, "$user - $msg")
-//
-//                    if (msg != null && user != null) {
-//                        showNotification(msg, user)
-//                    }
-//                } else
-//                    if (task == TASK_USERS) {
-//                        val usersList = intent.getStringExtra(PARAM_USERS_LIST)
-//
-//                        Log.i(LOG_TAG, usersList!!)
-//                    }
-//            }
-//        }
-//        val intFilt = IntentFilter(BROADCAST_ACTION)
-//        registerReceiver(br, intFilt)
-//    }
-
     override fun onRestart() {
         super.onRestart()
 
         Log.i(LOG_TAG, "onRestart")
+        Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show()
     }
 
     override fun onStop() {
         super.onStop()
 
         Log.i(LOG_TAG, "onStop")
-//        unregisterReceiver(br)
+        Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show()
     }
 }

@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.messanger.services.MsgService
 import com.example.messanger.services.MyService
 import java.io.BufferedReader
 import java.io.File
@@ -77,7 +78,7 @@ class PreferencesFragment : Fragment() {
     private fun startService() {
         // Start the service
         activity?.let {
-            val serviceIntent = Intent(it, MyService::class.java) //service
+            val serviceIntent = Intent(it, MsgService::class.java) //service
             it.startService(serviceIntent)
             // Update the TextView to indicate the service has started
             updateServiceStatus("SERVICE STARTED")
@@ -87,7 +88,7 @@ class PreferencesFragment : Fragment() {
     private fun stopService() {
         // Stop the service
         activity?.let {
-            val serviceIntent = Intent(it, MyService::class.java) //service!!!
+            val serviceIntent = Intent(it, MsgService::class.java) //service!!!
             it.stopService(serviceIntent)
             // Update the TextView to indicate the service has stopped
             updateServiceStatus("SERVICE STOPPED")
